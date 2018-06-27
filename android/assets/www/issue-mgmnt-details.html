@@ -1,0 +1,468 @@
+<!DOCTYPE html>
+<!--[if IE 9 ]>
+<html class="ie9"><![endif]-->
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <title>TIPS</title>
+
+    <!-- Vendor CSS -->
+    <link href="vendors/bower_components/animate.css/animate.min.css" rel="stylesheet">
+    <link href="vendors/bower_components/sweetalert/dist/sweetalert-override.min.css"
+          rel="stylesheet">
+    <link href="vendors/bower_components/material-design-iconic-font/css/material-design-iconic-font.min.css"
+          rel="stylesheet">
+    <link href="vendors/socicon/socicon.min.css" rel="stylesheet">
+    <link href="vendors/bower_components/bootstrap-select/dist/css/bootstrap-select.css"
+          rel="stylesheet">
+    <link href="vendors/bower_components/nouislider/distribute/jquery.nouislider.min.css"
+          rel="stylesheet">
+    <link href="vendors/bower_components/summernote/dist/summernote.css" rel="stylesheet">
+    <link href="vendors/bower_components/eonasdan-bootstrap-datetimepicker/build/css/bootstrap-datetimepicker.min.css"
+          rel="stylesheet">
+    <link href="vendors/farbtastic/farbtastic.css" rel="stylesheet">
+    <link href="vendors/chosen_v1.4.2/chosen.min.css" rel="stylesheet">
+
+    <!-- CSS -->
+    <link href="css/app.min.1.css" rel="stylesheet">
+    <link href="css/app.min.2.css" rel="stylesheet">
+</head>
+
+<body>
+<header id="header">
+    <ul class="header-inner">
+        <li id="menu-trigger" data-trigger="#sidebar">
+            <div class="line-wrap">
+                <div class="line top"></div>
+                <div class="line center"></div>
+                <div class="line bottom"></div>
+            </div>
+        </li>
+
+        <li class="logo">
+            <a href="#"><b>TIPS</b></a>
+        </li>
+        <li class="pull-right">
+            <ul class="top-menu">
+                <li onclick="saveIssue()" id="top-save">
+                    <a class="tm-submit" href="#"></a>
+                </li>
+            </ul>
+        </li>
+    </ul>
+</header>
+
+<section id="main">
+    <aside id="sidebar">
+        <div class="sidebar-inner c-overflow">
+            <div class="profile-menu">
+                <a href="">
+                    <div class="profile-pic">
+
+                    </div>
+                    <div class="profile-info">
+
+                    </div>
+                </a>
+                <ul class="main-menu">
+
+                    <li>
+                        <a href="#" id="sa-params"><i class="md md-history"></i> Logout</a>
+                    </li>
+                </ul>
+            </div>
+
+            <ul class="main-menu" id="editMenu">
+                <li><a href="index.html"><i class="md md-home"></i>Home</a></li>
+
+                <li><a href="assess360.html"><i class="md md-trending-up"></i>Assess360</a></li>
+
+                <li><a href="notifications.html"><i class="md md-notifications"></i>Notification</a>
+                </li>
+
+                <li class="sub-menu">
+                    <a href="#"><i class="md md-view-list"></i>Support Desk</a>
+
+                    <ul>
+                        <li class="active"><a href="#">Issue Management</a></li>
+                    </ul>
+                </li>
+
+                <!--<li><a href="#"><i class="md md-image"></i>Photo Gallery</a></li>-->
+
+                <li><a href="student-details.html"><i class="md md-my-library-books"></i>Student
+                    Details</a></li>
+
+                <li><a href="attendance.html"><i class="md md-today"></i> Attendance</a></li>
+
+                <li><a href="reportcard.html"><i class="md md-assessment"></i> Report Card</a></li>
+
+                <li><a href="map2.html"><i class="md md-location-on"></i> GPS Tracking</a></li>
+            </ul>
+        </div>
+    </aside>
+
+    <section id="content">
+        <div class="container">
+
+            <div class="card">
+                <div class="card-header ch-alt m-b-20">
+                    <h2>Register New Issue</h2>
+                </div>
+
+                <div class="card-body card-padding">
+                    <div class="row">
+                        <div class="col-sm-3 m-b-25">
+                            <p class="f-500 m-b-15 c-black">Issue Group</p>
+
+                            <select id="issueGroup" onchange="getIssueGroup(this)">
+
+                            </select>
+                        </div>
+
+                        <div class="col-sm-3 m-b-25">
+                            <p class="f-500 m-b-15 c-black">Issue Type</p>
+
+                            <select id="issueType">
+
+                            </select>
+                        </div>
+
+                    </div>
+                    <p class="c-black f-500 m-t-20 m-b-20">Issue Description</p>
+
+                    <div class="form-group">
+                        <div class="fg-line">
+                            <textarea id="issueDesc" class="form-control auto-size"
+                                      placeholder="Enter description"></textarea>
+                        </div>
+                    </div>
+                    <form role="form">
+                        <div class="form-group fg-line">
+                            <label for="contactEmail">Contact Email</label>
+                            <input type="email" class="form-control input-sm" id="contactEmail"
+                                   placeholder="Enter email">
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+</section>
+<div class="preloader" style="display: none;">
+    <div class="loader"></div>
+</div>
+
+<footer id="footer">
+    &copy; TIPS 2013 Support | Privacy Policy
+</footer>
+
+
+<!-- Javascript Libraries -->
+<script src="vendors/bower_components/jquery/dist/jquery.min.js"></script>
+<script src="vendors/bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+
+<script src="vendors/bower_components/jquery.nicescroll/jquery.nicescroll.min.js"></script>
+<script src="vendors/bower_components/Waves/dist/waves.min.js"></script>
+<script src="vendors/bootstrap-growl/bootstrap-growl.min.js"></script>
+<script src="vendors/bower_components/sweetalert/dist/sweetalert.min.js"></script>
+
+<script src="vendors/bower_components/moment/min/moment.min.js"></script>
+<script src="vendors/bower_components/bootstrap-select/dist/js/bootstrap-select.js"></script>
+<script src="vendors/bower_components/nouislider/distribute/jquery.nouislider.all.min.js"></script>
+<script src="vendors/bower_components/summernote/dist/summernote.min.js"></script>
+<script src="vendors/bower_components/eonasdan-bootstrap-datetimepicker/build/js/bootstrap-datetimepicker.min.js"></script>
+
+<!-- Placeholder for IE9 -->
+<!--[if IE 9 ]>
+<script src="vendors/bower_components/jquery-placeholder/jquery.placeholder.min.js"></script>
+<![endif]-->
+
+<script src="vendors/chosen_v1.4.2/chosen.jquery.min.js"></script>
+<script src="vendors/fileinput/fileinput.min.js"></script>
+<script src="vendors/input-mask/input-mask.min.js"></script>
+<script src="vendors/farbtastic/farbtastic.min.js"></script>
+<script src="vendors/bower_components/autosize/dist/autosize.min.js"></script>
+
+
+<script src="cordova.js"></script>
+<script src="js/functions.js"></script>
+<script src="js/apps.js"></script>
+
+<script type="text/javascript">
+        document.addEventListener("deviceready", onDeviceReady, false);
+
+            function onDeviceReady(){
+
+            var strUserId = JSON.parse(localStorage.getItem("mUserId"));
+            var uProfile = [];
+            uProfile[0]=strUserId+"<i class=\"md md-arrow-drop-down\"></i>";
+            $('div.profile-info').html(uProfile);
+
+            var strEmailId = JSON.parse(localStorage.getItem("email"));
+            $("#contactEmail").val(strEmailId);
+
+            var strCampus = JSON.parse(localStorage.getItem("mCampus"));
+            var strGrade = JSON.parse(localStorage.getItem("grade"));
+            if(strCampus=="Salem KG" || strCampus=="TIPS CBSE" || strCampus=="TIPS MONTI"){
+                document.getElementById("editMenu").children[1].style.display = "none"
+            }else  if(!(strGrade=="VI" || strGrade=="VII" || strGrade=="VIII" || strGrade=="IX" || strGrade=="X")){
+                document.getElementById("editMenu").children[1].style.display = "none"
+            }
+
+            issueGroup(strGrade);
+
+
+
+        }
+
+        function getIssueGroup(sel) {
+            var selectedGroup = sel.value;
+             $(".preloader").show();
+            issueType(selectedGroup);
+        }
+
+
+        //Parameter
+            $('#sa-params').click(function(){
+                swal({
+                    title: "Are you sure you want to logout?",
+                    type: "warning",
+                    showCancelButton: true,
+                    confirmButtonColor: "#DD6B55",
+                    confirmButtonText: "Yes, logout!",
+                    cancelButtonText: "No, cancel!",
+                    closeOnConfirm: false
+                }, function(isConfirm){
+                    if (isConfirm) {
+                       window.localStorage.clear();
+                       document.location.href = "login.html";
+                    }
+                });
+            });
+
+
+            function saveIssue() {
+
+                var strDesc = document.querySelector('#issueDesc').value;
+
+                var strEmail = document.querySelector('#contactEmail').value;
+
+
+
+                if (strDesc == "") {
+                    notify('Please enter a description.', 'warning');
+
+                } else if (strEmail == "") {
+                    notify('Please enter a email.', 'warning');
+
+                } else {
+
+
+                $(".preloader").show();
+                var strUserId = JSON.parse(localStorage.getItem("mUserId"));
+                var strCampus = JSON.parse(localStorage.getItem("mCampus"));
+                var strGrade = JSON.parse(localStorage.getItem("grade"));
+
+                var e = document.getElementById("issueGroup");
+                var strIssueGroup = e.options[e.selectedIndex].text;
+
+                var e = document.getElementById("issueType");
+                var strIssueType = e.options[e.selectedIndex].text;
+
+                var strDept = strIssueGroup.toUpperCase();
+
+                var strDesc = document.querySelector('#issueDesc').value;
+
+                var strEmail = document.querySelector('#contactEmail').value;
+
+                var strStuName = JSON.parse(localStorage.getItem("stuName"));
+
+                var strStuNumber = JSON.parse(localStorage.getItem("stuNumber"));
+
+                var strSection = JSON.parse(localStorage.getItem("section"));
+
+
+                 var strCurrDate = js_yyyy_mm_dd_hh_mm_ss();
+
+                 var strStatus = "LogIssue";
+
+                var arraySaveIssueDetails =[];
+                var xmlhttp = new XMLHttpRequest();
+                xmlhttp.open('POST', getURL(), true);
+                var soapRequest="<s:Envelope xmlns:s=\"http://schemas.xmlsoap.org/soap/envelope/\">" +
+					"<s:Header>" +
+					"</s:Header>" +
+					"<s:Body>" +
+					"<SaveOrUpdateCallManagement xmlns=\"http://tempuri.org/\">" +
+					"<CallManagement xmlns:d4p1=\"http://schemas.datacontract.org/2004/07/TIPS.Entities\" xmlns:i=\"http://www.w3.org/2001/XMLSchema-instance\">" +
+					"<d4p1:ActionDate i:nil=\"true\" />" +
+					"<d4p1:Activity />" +
+					"<d4p1:ActivityFullName i:nil=\"true\" />" +
+					"<d4p1:Approved>0</d4p1:Approved>" +
+					"<d4p1:Approver i:nil=\"true\" />" +
+					"<d4p1:BranchCode>"+strCampus+"</d4p1:BranchCode>" +
+					"<d4p1:CallFrom i:nil=\"true\" />" +
+					"<d4p1:CallerName i:nil=\"true\" />" +
+					"<d4p1:CommentsList />" +
+					"<d4p1:Completed>0</d4p1:Completed>" +
+					"<d4p1:DeptCode>"+strDept+"</d4p1:DeptCode>" +
+					"<d4p1:Description>"+strDesc+"</d4p1:Description>" +
+					"<d4p1:DifferenceInHours i:nil=\"true\" />" +
+					"<d4p1:Email>"+strEmail+"</d4p1:Email>" +
+					"<d4p1:Grade>"+strGrade+"</d4p1:Grade>" +
+					"<d4p1:Hours>0</d4p1:Hours>" +
+					"<d4p1:Id>0</d4p1:Id>" +
+					"<d4p1:InformationFor i:nil=\"true\" />" +
+					"<d4p1:InstanceId>0</d4p1:InstanceId>" +
+					"<d4p1:IsHosteller>false</d4p1:IsHosteller>" +
+					"<d4p1:IsInformation>false</d4p1:IsInformation>" +
+					"<d4p1:IsIssueCompleted>false</d4p1:IsIssueCompleted>" +
+					"<d4p1:IssueDate>"+strCurrDate+"</d4p1:IssueDate>" +
+					"<d4p1:IssueGroup>"+strIssueGroup+"</d4p1:IssueGroup>" +
+					"<d4p1:IssueNumber i:nil=\"true\" />" +
+					"<d4p1:IssueType>"+strIssueType+"</d4p1:IssueType>" +
+					"<d4p1:LeaveType i:nil=\"true\" />" +
+					"<d4p1:Logged>0</d4p1:Logged>" +
+					"<d4p1:Performer i:nil=\"true\" />" +
+					"<d4p1:Receiver i:nil=\"true\" />" +
+					"<d4p1:ReceiverGroup i:nil=\"true\" />" +
+					"<d4p1:Resolution i:nil=\"true\" />" +
+					"<d4p1:Resolved>0</d4p1:Resolved>" +
+					"<d4p1:School>"+strCampus+"</d4p1:School>" +
+					"<d4p1:Section>"+strSection+"</d4p1:Section>" +
+					"<d4p1:Status>"+strStatus+"</d4p1:Status>" +
+					"<d4p1:StudentName>"+strStuName+"</d4p1:StudentName>" +
+					"<d4p1:StudentNumber>"+strStuNumber+"</d4p1:StudentNumber>" +
+					"<d4p1:StudentType i:nil=\"true\" />" +
+					"<d4p1:UserInbox>"+strUserId+"</d4p1:UserInbox>" +
+					"<d4p1:UserRoleName i:nil=\"true\" />" +
+					"<d4p1:UserType>Parent</d4p1:UserType>" +
+					"<d4p1:WaitingForParentCnfm>false</d4p1:WaitingForParentCnfm>" +
+					"</CallManagement>" +
+					"<TemplateName>CallManagement</TemplateName>" +
+					"<userId>"+strUserId+"</userId>" +
+					"</SaveOrUpdateCallManagement>" +
+					"</s:Body>" +
+					"</s:Envelope>";
+
+
+                xmlhttp.onreadystatechange = function () {
+                    if (xmlhttp.readyState == 4) {
+                        if (xmlhttp.status == 200) {
+
+                    var xml = xmlhttp.responseText, xmlDoc = $.parseXML(xml);
+
+                    $(xmlDoc).find('SaveOrUpdateCallManagementResponse').each(function () {
+                        var objSaveIssueDetails = {};
+
+                        objSaveIssueDetails.submitResult = xmlDoc.getElementsByTagName("SaveOrUpdateCallManagementResult")[0].childNodes[0].nodeValue;
+
+                        arraySaveIssueDetails.push(objSaveIssueDetails);
+
+                              if((xmlDoc.getElementsByTagName("SaveOrUpdateCallManagementResult")[0].childNodes[0].nodeValue).length>4){
+                                  alertError(arraySaveIssueDetails[0].submitResult);
+                                  //notify(''+arraySaveIssueDetails[0].submitResult, 'warning');
+                             }else{
+
+                                alertSuccess(arraySaveIssueDetails[0].submitResult);
+                                //notify('Issue created Successfully. Issue Number is:MCMGT"+arraySaveIssueDetails[0].submitResult+"', 'success');
+                             }
+                    });
+                     }
+                    }
+
+                }
+                xmlhttp.setRequestHeader('SOAPAction', 'http://tempuri.org/ITIPSMobileAppService/SaveOrUpdateCallManagement');
+                xmlhttp.setRequestHeader('Content-Type', 'text/xml;charset=UTF-8');
+                xmlhttp.send(soapRequest);
+
+                }
+
+            }
+
+
+            function js_yyyy_mm_dd_hh_mm_ss () {
+                  now = new Date();
+                  year = "" + now.getFullYear();
+                  month = "" + (now.getMonth() + 1); if (month.length == 1) { month = "0" + month; }
+                  day = "" + now.getDate(); if (day.length == 1) { day = "0" + day; }
+                  hour = "" + now.getHours(); if (hour.length == 1) { hour = "0" + hour; }
+                  minute = "" + now.getMinutes(); if (minute.length == 1) { minute = "0" + minute; }
+                  second = "" + now.getSeconds(); if (second.length == 1) { second = "0" + second; }
+                  return year + "-" + month + "-" + day + "T" + hour + ":" + minute + ":" + second;
+            }
+
+
+            /*
+             * Bootstrap Growl - Notifications popups
+             */
+            function notify(message, type){
+                $.growl({
+                    message: message
+                },{
+                    type: type,
+                    allow_dismiss: false,
+                    label: 'Cancel',
+                    placement: {
+                        from: 'bottom',
+                        align: 'center'
+                    },
+                    delay: 2500,
+                    animate: {
+                        enter: 'animated fadeInUp',
+                        exit: 'animated fadeOutDown'
+                    },
+                    offset: {
+                        x: 20,
+                        y: 85
+                    }
+                });
+            };
+
+
+
+
+            function alertError(strError){
+                     $(".preloader").hide();
+                 swal({
+                    title: "Error",
+                    text: ""+strError,
+                    type: "warning",
+                    showCancelButton: false,
+                    confirmButtonColor: "#DD6B55",
+                    confirmButtonText: "OK",
+                    closeOnConfirm: true,
+                }, function(isConfirm){
+                    if (isConfirm) {
+
+                    }
+                });
+            }
+
+            function alertSuccess(strIssueNumber){
+                    $(".preloader").hide();
+                swal({
+                    title: "Issue created Successfully.",
+                    text: "Issue Number is: m.PCMGT-"+strIssueNumber,
+                    type: "success",
+                    showCancelButton: false,
+                    confirmButtonColor: "#DD6B55",
+                    confirmButtonText: "OK",
+                    closeOnConfirm: true,
+                }, function(isConfirm){
+                    if (isConfirm) {
+                       document.location.href = "issue-mgmnt.html";
+                    }
+                });
+
+
+            }
+
+
+
+</script>
+
+</body>
+</html>

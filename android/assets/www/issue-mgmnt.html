@@ -1,0 +1,375 @@
+<!DOCTYPE html>
+<!--[if IE 9 ]>
+<html class="ie9"><![endif]-->
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <title>TIPS</title>
+
+    <!-- Vendor CSS -->
+    <link href="vendors/bower_components/animate.css/animate.min.css" rel="stylesheet">
+    <link href="vendors/bower_components/sweetalert/dist/sweetalert-override.min.css"
+          rel="stylesheet">
+    <link href="vendors/bower_components/material-design-iconic-font/css/material-design-iconic-font.min.css"
+          rel="stylesheet">
+    <link href="vendors/socicon/socicon.min.css" rel="stylesheet">
+    <link href="vendors/bower_components/bootstrap-select/dist/css/bootstrap-select.css"
+          rel="stylesheet">
+    <link href="vendors/bower_components/nouislider/distribute/jquery.nouislider.min.css"
+          rel="stylesheet">
+    <link href="vendors/bower_components/summernote/dist/summernote.css" rel="stylesheet">
+    <link href="vendors/bower_components/eonasdan-bootstrap-datetimepicker/build/css/bootstrap-datetimepicker.min.css"
+          rel="stylesheet">
+    <link href="vendors/farbtastic/farbtastic.css" rel="stylesheet">
+    <link href="vendors/chosen_v1.4.2/chosen.min.css" rel="stylesheet">
+
+    <!-- CSS -->
+    <link href="css/app.min.1.css" rel="stylesheet">
+    <link href="css/app.min.2.css" rel="stylesheet">
+</head>
+
+<body>
+<header id="header">
+    <ul class="header-inner">
+        <li id="menu-trigger" data-trigger="#sidebar">
+            <div class="line-wrap">
+                <div class="line top"></div>
+                <div class="line center"></div>
+                <div class="line bottom"></div>
+            </div>
+        </li>
+
+        <li class="logo">
+            <a href="#"><b>TIPS</b></a>
+        </li>
+        <li class="pull-right">
+            <ul class="top-menu">
+                <li id="top-save">
+                    <a class="tm-add" href="issue-mgmnt-details.html"></a>
+                </li>
+            </ul>
+        </li>
+    </ul>
+</header>
+
+<section id="main">
+    <aside id="sidebar">
+        <div class="sidebar-inner c-overflow">
+            <div class="profile-menu">
+                <a href="">
+                    <div class="profile-pic">
+
+                    </div>
+                    <div class="profile-info">
+
+                    </div>
+                </a>
+                <ul class="main-menu">
+
+                    <li>
+                        <a href="#" id="sa-params"><i class="md md-history"></i> Logout</a>
+                    </li>
+                </ul>
+            </div>
+
+            <ul class="main-menu" id="editMenu">
+                <li><a href="index.html"><i class="md md-home"></i>Home</a></li>
+
+                <li><a href="assess360.html"><i class="md md-trending-up"></i>Assess360</a></li>
+
+                <li><a href="notifications.html"><i class="md md-notifications"></i>Notification</a>
+                </li>
+
+                <li class="sub-menu">
+                    <a href="#"><i class="md md-view-list"></i>Support Desk</a>
+
+                    <ul>
+                        <li class="active"><a href="#">Issue Management</a></li>
+                    </ul>
+                </li>
+
+                <!--<li><a href="#"><i class="md md-image"></i>Photo Gallery</a></li>-->
+
+                <li><a href="student-details.html"><i class="md md-my-library-books"></i>Student
+                    Details</a></li>
+
+                <li><a href="attendance.html"><i class="md md-today"></i> Attendance</a></li>
+
+                <li><a href="reportcard.html"><i class="md md-assessment"></i> Report Card</a></li>
+
+                <li><a href="map2.html"><i class="md md-location-on"></i> GPS Tracking</a></li>
+
+            </ul>
+        </div>
+    </aside>
+
+    <section id="content">
+        <div class="container">
+
+            <div class="card">
+                <div class="listview lv-bordered lv-lg">
+                    <div class="lv-header-alt">
+                        <h2 id="issueCount" class="lvh-label">Issue List</h2>
+                    </div>
+
+                    <div class="lv-body" id="issueList">
+                        <div id="noData" style="margin:15px;">No issue list.</div>
+                    </div>
+                </div>
+                <!-- <ul class="pagination lv-pagination">
+                     <li>
+                         <a href="" aria-label="Previous">
+                             <i class="md md-chevron-left"></i>
+                         </a>
+                     </li>
+                     <li class="active"><a href="">1</a></li>
+                     <li><a href="">2</a></li>
+                     <li><a href="">3</a></li>
+                     <li>
+                         <a href="" aria-label="Next">
+                             <i class="md md-chevron-right"></i>
+                         </a>
+                     </li>
+                 </ul>-->
+            </div>
+        </div>
+    </section>
+</section>
+
+<div class="preloader" style="display: none;">
+    <div class="loader"></div>
+</div>
+
+<footer id="footer">
+    &copy; TIPS 2013 Support | Privacy Policy
+</footer>
+
+
+<!-- Javascript Libraries -->
+<script src="vendors/bower_components/jquery/dist/jquery.min.js"></script>
+<script src="vendors/bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+
+<script src="vendors/bower_components/jquery.nicescroll/jquery.nicescroll.min.js"></script>
+<script src="vendors/bower_components/Waves/dist/waves.min.js"></script>
+<script src="vendors/bootstrap-growl/bootstrap-growl.min.js"></script>
+<script src="vendors/bower_components/sweetalert/dist/sweetalert.min.js"></script>
+
+<script src="vendors/bower_components/moment/min/moment.min.js"></script>
+<script src="vendors/bower_components/bootstrap-select/dist/js/bootstrap-select.js"></script>
+<script src="vendors/bower_components/nouislider/distribute/jquery.nouislider.all.min.js"></script>
+<script src="vendors/bower_components/summernote/dist/summernote.min.js"></script>
+
+
+<!-- Placeholder for IE9 -->
+<!--[if IE 9 ]>
+<script src="vendors/bower_components/jquery-placeholder/jquery.placeholder.min.js"></script>
+<![endif]-->
+
+<script src="vendors/chosen_v1.4.2/chosen.jquery.min.js"></script>
+<script src="vendors/fileinput/fileinput.min.js"></script>
+<script src="vendors/input-mask/input-mask.min.js"></script>
+<script src="vendors/farbtastic/farbtastic.min.js"></script>
+<script src="vendors/bower_components/autosize/dist/autosize.min.js"></script>
+
+
+<script src="cordova.js"></script>
+<script src="js/functions.js"></script>
+<script src="js/apps.js"></script>
+
+<script type="text/javascript">
+        document.addEventListener("deviceready", onDeviceReady, false);
+
+            function onDeviceReady(){
+
+            var strUserId = JSON.parse(localStorage.getItem("mUserId"));
+            var uProfile = [];
+            uProfile[0]=strUserId+"<i class=\"md md-arrow-drop-down\"></i>";
+            $('div.profile-info').html(uProfile);
+
+            var strCampus = JSON.parse(localStorage.getItem("mCampus"));
+            var strGrade = JSON.parse(localStorage.getItem("grade"));
+            if(strCampus=="Salem KG" || strCampus=="TIPS CBSE" || strCampus=="TIPS MONTI"){
+                document.getElementById("editMenu").children[1].style.display = "none"
+            }else  if(!(strGrade=="VI" || strGrade=="VII" || strGrade=="VIII" || strGrade=="IX" || strGrade=="X")){
+                document.getElementById("editMenu").children[1].style.display = "none"
+            }
+
+            $(".preloader").show();
+             var xmlhttp = new XMLHttpRequest();
+        xmlhttp.open('POST',getURL(), true);
+        var soapRequest="<?xml version=\"1.0\" encoding=\"utf-8\"?>" +
+                "<s:Envelope xmlns:s=\"http://schemas.xmlsoap.org/soap/envelope/\">" +
+                "<s:Header>" +
+                "</s:Header>" +
+                "<s:Body>" +
+                "<IssueManagementList xmlns=\"http://tempuri.org/\">" +
+                "<userId>"+strUserId+"</userId>" +
+                "<rows>10</rows>" +
+                "<sidx i:nil=\"true\" xmlns:i=\"http://www.w3.org/2001/XMLSchema-instance\" />" +
+                "<sord i:nil=\"true\" xmlns:i=\"http://www.w3.org/2001/XMLSchema-instance\" />" +
+                "<page>1</page>" +
+                "</IssueManagementList>" +
+                "</s:Body>" +
+                "</s:Envelope>";
+
+
+
+        xmlhttp.onreadystatechange = function () {
+            if (xmlhttp.readyState===4 && xmlhttp.status===200) {
+            var xml = xmlhttp.responseText, xmlDoc = $.parseXML(xml);
+
+            var arrayIssueList =[];
+            $(xmlDoc).find('CallManagementView').each(function () {
+                var objIssueList = {};
+
+                objIssueList.IssueNumber = $(this).find('IssueNumber').text();
+                objIssueList.IssueDate = $(this).find('IssueDate').text();
+                objIssueList.IssueGroup = $(this).find('IssueGroup').text();
+                objIssueList.IssueType = $(this).find('IssueType').text();
+                objIssueList.Status = $(this).find('Status').text();
+                objIssueList.Description = $(this).find('Description').text();
+                objIssueList.Resolution = $(this).find('Resolution').text();
+
+                arrayIssueList.push(objIssueList);
+
+            });
+
+            //arrayIssueList.reverse();
+
+            var varIssueList=[];
+            for(var i = 0; i < arrayIssueList.length; i++) {
+                var aDate = (arrayIssueList[i].IssueDate).replace("T"," ");
+                var d = new Date(aDate);
+                var cdate=formatDate(d,3);
+                var ctime=formatAMPM(d);
+                var strDate = cdate +" "+ctime;
+
+                var strStatus="";
+                if(arrayIssueList[i].Status=="Completed"){
+                    strStatus = "Completed";
+                }else if(arrayIssueList[i].Status=="ResolveIssueRejection" || arrayIssueList[i].Status=="ApproveIssueRejection"){
+                    strStatus = "Rejected";
+                }else{
+                    strStatus = "InProgress";
+                }
+
+                var strcmnts = "";
+                if(arrayIssueList[i].Resolution=="" || arrayIssueList[i].Resolution==null){
+                    strcmnts = "";
+                }else{
+                    strcmnts = "<li>Comments: " + arrayIssueList[i].Resolution + "</li>";
+                }
+
+             varIssueList[i]="<div class=\"lv-item media\">" +
+                        "<div class=\"media-body\"><div class=\"lv-title\">" + arrayIssueList[i].IssueNumber + "</div>" +
+                        "<small class=\"lv-small\">" + arrayIssueList[i].IssueGroup + " - " + arrayIssueList[i].IssueType + "</small>" +
+                        "<small class=\"lv-small\"><br>" + arrayIssueList[i].Description + "</small>" +
+                        "<ul class=\"lv-attrs\">" +
+                        "<li>Date Created: " + strDate + "</li>" +
+                        "<li>Status: " + strStatus + "</li>" +
+                        ""+strcmnts+"" +
+                        "</ul>" +
+                        "</div>" +
+                        "</div>";
+
+
+
+            }
+
+             if(varIssueList.length>0){
+                $(".preloader").hide();
+                 $('#noData').hide();
+                 //$('#issueCount').text('Issue List ( Total Issue: '+varIssueList.length+' )');
+                $('#issueList').html(varIssueList);
+            }else{
+                $(".preloader").hide();
+                $('#noData').show();
+            }
+
+            }
+
+
+
+        }
+        xmlhttp.setRequestHeader('SOAPAction', 'http://tempuri.org/ITIPSMobileAppService/IssueManagementList');
+        xmlhttp.setRequestHeader('Content-Type', 'text/xml;charset=UTF-8');
+        xmlhttp.send(soapRequest);
+
+
+
+        }
+
+
+        //Parameter
+            $('#sa-params').click(function(){
+                swal({
+                    title: "Are you sure you want to logout?",
+                    type: "warning",
+                    showCancelButton: true,
+                    confirmButtonColor: "#DD6B55",
+                    confirmButtonText: "Yes, logout!",
+                    cancelButtonText: "No, cancel!",
+                    closeOnConfirm: false
+                }, function(isConfirm){
+                    if (isConfirm) {
+                       window.localStorage.clear();
+                       document.location.href = "login.html";
+                    }else{
+
+                    }
+                });
+            });
+
+            function formatDate(dateObj,format)
+            {
+                var monthNames = [ "January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December" ];
+                var curr_date = dateObj.getDate();
+                var curr_month = dateObj.getMonth();
+                curr_month = curr_month + 1;
+                var curr_year = dateObj.getFullYear();
+                var curr_min = dateObj.getMinutes();
+                var curr_hr= dateObj.getHours();
+                var curr_sc= dateObj.getSeconds();
+                if(curr_month.toString().length == 1)
+                curr_month = '0' + curr_month;
+                if(curr_date.toString().length == 1)
+                curr_date = '0' + curr_date;
+                if(curr_hr.toString().length == 1)
+                curr_hr = '0' + curr_hr;
+                if(curr_min.toString().length == 1)
+                curr_min = '0' + curr_min;
+
+                if(format ==1)//dd-mm-yyyy
+                {
+                    return curr_date + "-"+curr_month+ "-"+curr_year;
+                }
+                else if(format ==2)//yyyy-mm-dd
+                {
+                    return curr_year + "-"+curr_month+ "-"+curr_date;
+                }
+                else if(format ==3)//dd/mm/yyyy
+                {
+                    return curr_date + "/"+curr_month+ "/"+curr_year;
+                }
+                else if(format ==4)// MM/dd/yyyy HH:mm:ss
+                {
+                    return curr_month+"/"+curr_date +"/"+curr_year;
+                }
+            }
+
+            function formatAMPM(date) {
+
+              var hours = date.getHours();
+              var minutes = date.getMinutes();
+              var ampm = hours >= 12 ? 'pm' : 'am';
+              hours = hours % 12;
+              hours = hours ? hours : 12;
+              minutes = minutes < 10 ? '0'+minutes : minutes;
+              var strTime = hours + ':' + minutes + ' ' + ampm;
+              return strTime;
+            }
+
+</script>
+
+</body>
+</html>

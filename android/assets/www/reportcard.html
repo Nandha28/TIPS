@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <title>TIPS</title>
+
+    <!-- Vendor CSS -->
+    <link href="vendors/bower_components/animate.css/animate.min.css" rel="stylesheet">
+    <link href="vendors/bower_components/sweetalert/dist/sweetalert-override.min.css"
+          rel="stylesheet">
+    <link href="vendors/bower_components/material-design-iconic-font/css/material-design-iconic-font.min.css"
+          rel="stylesheet">
+
+    <!-- CSS -->
+    <link href="css/app.min.1.css" rel="stylesheet">
+    <link href="css/img_slider.css" rel="stylesheet" type="text/css"/>
+
+
+</head>
+<body>
+<header id="header">
+    <ul class="header-inner">
+        <li id="menu-trigger" data-trigger="#sidebar">
+            <div class="line-wrap">
+                <div class="line top"></div>
+                <div class="line center"></div>
+                <div class="line bottom"></div>
+            </div>
+        </li>
+
+        <li class="logo">
+            <a href="#"><b>TIPS</b></a>
+        </li>
+    </ul>
+</header>
+
+<section id="main">
+    <aside id="sidebar">
+        <div class="sidebar-inner c-overflow">
+            <div class="profile-menu">
+                <a href="">
+                    <div class="profile-pic">
+
+                    </div>
+                    <div class="profile-info">
+                        <i class="md md-arrow-drop-down"></i>
+                    </div>
+                </a>
+
+                <ul class="main-menu">
+
+                    <li>
+                        <a href="#" id="sa-params"><i class="md md-history"></i> Logout</a>
+                    </li>
+                </ul>
+            </div>
+
+            <ul class="main-menu" id="editMenu">
+                <li><a href="index.html"><i class="md md-home"></i>Home</a></li>
+
+                <li><a href="assess360.html"><i class="md md-trending-up"></i>Assess360</a></li>
+
+                <li><a href="#"><i class="md md-notifications"></i>Notification</a>
+                </li>
+
+                <li class="sub-menu">
+                    <a href="#"><i class="md md-view-list"></i>Support Desk</a>
+
+                    <ul>
+                        <li><a href="issue-mgmnt.html">Issue Management</a></li>
+                    </ul>
+                </li>
+
+                <!-- <li><a href="#"><i class="md md-image"></i>Photo Gallery</a></li>-->
+
+                <li><a href="student-details.html"><i class="md md-my-library-books"></i>Student
+                    Details</a></li>
+
+                <li><a href="attendance.html"><i class="md md-today"></i> Attendance</a></li>
+
+                <li class="active"><a href="reportcard.html"><i class="md md-assessment"></i> Report Card</a></li>
+
+                <li><a href="map2.html"><i class="md md-location-on"></i> GPS Tracking</a></li>
+            </ul>
+        </div>
+    </aside>
+
+
+    <section id="content">
+        <div class="container">
+            <div class="row">
+                <div class="col-sm-6">
+
+
+                </div>
+            </div>
+        </div>
+    </section>
+</section>
+
+<div class="preloader" style="display: none;">
+    <div class="loader"></div>
+</div>
+
+<footer id="footer">
+    &copy; TIPS 2013 Support | Privacy Policy
+</footer>
+
+<!-- Javascript Libraries -->
+<script src="vendors/bower_components/jquery/dist/jquery.min.js"></script>
+<script src="vendors/bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+<script src="vendors/bower_components/sweetalert/dist/sweetalert.min.js"></script>
+<script src="vendors/bower_components/jquery.nicescroll/jquery.nicescroll.min.js"></script>
+
+<script src="cordova.js"></script>
+<script src="js/functions.js"></script>
+<script src="js/apps.js"></script>
+
+
+<script type="text/javascript">
+    document.addEventListener("deviceready", onDeviceReady, false);
+
+            function onDeviceReady(){
+ var strUserId = JSON.parse(localStorage.getItem("mUserId"));
+
+   var uProfile = [];
+        uProfile[0]=strUserId+"<i class=\"md md-arrow-drop-down\"></i>";
+        $('div.profile-info').html(uProfile);
+
+            window.open('http://icampus.theindianpublicschool.org:8081/Api/MobileAPI/GetReportCard?userId='+strUserId+'','_blank', 'location=no');
+
+}
+
+
+
+
+</script>
+
+</body>
+</html>

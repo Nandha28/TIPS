@@ -1,0 +1,523 @@
+<!DOCTYPE html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <title>TIPS</title>
+
+    <!-- Vendor CSS -->
+    <link href="vendors/bower_components/animate.css/animate.min.css" rel="stylesheet">
+    <link href="vendors/bower_components/sweetalert/dist/sweetalert-override.min.css"
+          rel="stylesheet">
+    <link href="vendors/bower_components/material-design-iconic-font/css/material-design-iconic-font.min.css"
+          rel="stylesheet">
+
+    <!-- CSS -->
+    <link href="css/app.min.1.css" rel="stylesheet">
+    <link href="css/img_slider.css" rel="stylesheet" type="text/css"/>
+
+
+
+
+</head>
+<body>
+<header id="header">
+    <ul class="header-inner">
+        <li id="menu-trigger" data-trigger="#sidebar">
+            <div class="line-wrap">
+                <div class="line top"></div>
+                <div class="line center"></div>
+                <div class="line bottom"></div>
+            </div>
+        </li>
+
+        <li class="logo">
+            <a href="#"><b>TIPS</b></a>
+        </li>
+    </ul>
+</header>
+
+<section id="main">
+    <aside id="sidebar">
+        <div class="sidebar-inner c-overflow">
+            <div class="profile-menu">
+                <a href="">
+                    <div class="profile-pic">
+
+                    </div>
+                    <div class="profile-info">
+                        <i class="md md-arrow-drop-down"></i>
+                    </div>
+                </a>
+
+                <ul class="main-menu">
+
+                    <li>
+                        <a href="#" id="sa-params"><i class="md md-history"></i> Logout</a>
+                    </li>
+                </ul>
+            </div>
+
+            <ul class="main-menu" id="editMenu">
+                <li><a href="index.html"><i class="md md-home"></i>Home</a></li>
+
+                <li><a href="assess360.html"><i class="md md-trending-up"></i>Assess360</a></li>
+
+                <li class="active"><a href="#"><i class="md md-notifications"></i>Notification</a>
+                </li>
+
+                <li class="sub-menu">
+                    <a href="#"><i class="md md-view-list"></i>Support Desk</a>
+
+                    <ul>
+                        <li><a href="issue-mgmnt.html">Issue Management</a></li>
+                    </ul>
+                </li>
+
+                <!-- <li><a href="#"><i class="md md-image"></i>Photo Gallery</a></li>-->
+
+                <li><a href="student-details.html"><i class="md md-my-library-books"></i>Student
+                    Details</a></li>
+
+                <li><a href="attendance.html"><i class="md md-today"></i> Attendance</a></li>
+
+                <li><a href="reportcard.html"><i class="md md-assessment"></i> Report Card</a></li>
+
+                <li><a href="map2.html"><i class="md md-location-on"></i> GPS Tracking</a></li>
+
+            </ul>
+        </div>
+    </aside>
+
+
+    <section id="content">
+        <div class="container">
+            <div class="row">
+                <div class="col-sm-6">
+
+                    <!-- Recent Posts -->
+                    <div class="card">
+                        <div class="card-header ch-alt m-b-20">
+                            <h2>Notification Details</h2>
+                        </div>
+                        <div class="card-body">
+                            <div class="NoteClass">
+                                <div id="ViewNote">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="card">
+                        <div class="card-header ch-alt m-b-20">
+                            <h2>Attachment</h2>
+                        </div>
+                        <div class="card-body">
+                            <div class="attachClass">
+                                <div id="ViewAttachment">
+                                </div>
+                            </div>
+                            <a id="viewAttach"></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</section>
+<iframe id="iframeSelector" style="display:none;"></iframe>
+<div class="preloader" style="display: none;">
+    <div class="loader"></div>
+</div>
+
+<footer id="footer">
+    &copy; TIPS 2013 Support | Privacy Policy
+</footer>
+
+<!-- Javascript Libraries -->
+<script src="vendors/bower_components/jquery/dist/jquery.min.js"></script>
+<script src="vendors/bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+<script src="vendors/bower_components/sweetalert/dist/sweetalert.min.js"></script>
+<script src="vendors/bower_components/jquery.nicescroll/jquery.nicescroll.min.js"></script>
+
+<script src="cordova.js"></script>
+<script src="js/functions.js"></script>
+<script src="js/apps.js"></script>
+
+
+<script type="text/javascript">
+    document.addEventListener("deviceready", onDeviceReady, false);
+
+            function onDeviceReady(){
+        var strCampus = JSON.parse(localStorage.getItem("mCampus"));
+        var strGrade = JSON.parse(localStorage.getItem("grade"));
+        if(strCampus=="Salem KG" || strCampus=="TIPS CBSE" || strCampus=="TIPS MONTI"){
+            document.getElementById("editMenu").children[1].style.display = "none"
+        }else  if(!(strGrade=="VI" || strGrade=="VII" || strGrade=="VIII" || strGrade=="IX" || strGrade=="X")){
+            document.getElementById("editMenu").children[1].style.display = "none"
+        }
+
+
+
+        var strUserId = JSON.parse(localStorage.getItem("mUserId"));
+        var uProfile = [];
+            uProfile[0]=strUserId+"<i class=\"md md-arrow-drop-down\"></i>";
+             $('div.profile-info').html(uProfile);
+
+         var strSelectedNotes = JSON.parse(localStorage.getItem("selectedNotes"));
+
+        notificationDetails(strSelectedNotes);
+
+        attachmentDetails(strSelectedNotes);
+
+
+}
+
+        function notificationDetails(strSelectedNotes) {
+                var xmlhttp = new XMLHttpRequest();
+                xmlhttp.open('POST',getURL(), true);
+                var soapRequest="<?xml version=\"1.0\" encoding=\"utf-8\"?>" +
+                        "<s:Envelope xmlns:s=\"http://schemas.xmlsoap.org/soap/envelope/\">" +
+                        "<s:Header>" +
+                        "</s:Header>" +
+                        "<s:Body>" +
+                        "<GetGeneralNotificationByNotePreId xmlns=\"http://tempuri.org/\">" +
+                        "<NotePreId>"+strSelectedNotes+"</NotePreId>" +
+                        "</GetGeneralNotificationByNotePreId>" +
+                        "</s:Body>" +
+                        "</s:Envelope>";
+
+
+
+                xmlhttp.onreadystatechange = function () {
+                     if (xmlhttp.readyState===4 && xmlhttp.status===200) {
+                    var xml = xmlhttp.responseText, xmlDoc = $.parseXML(xml);
+
+                    var arrayNotification =[];
+                    $(xmlDoc).find('GetGeneralNotificationByNotePreIdResult').each(function () {
+                        var objNotification = {};
+
+                        objNotification.NoteId = $(this).find('NotePreId').text();
+                        objNotification.Topic = $(this).find('Topic').text();
+                        objNotification.Message = $(this).find('Message').text();
+                        objNotification.PublishedOn = $(this).find('PublishedOn').text();
+                        objNotification.Status = $(this).find('Status').text();
+
+                        arrayNotification.push(objNotification);
+
+                    });
+                    var varNoteGeneral=[];
+                    for(var i = 0; i < arrayNotification.length; i++) {
+                        if(arrayNotification[i].Status==1){
+                        varNoteGeneral[i] = "<a href='#' style='text-decoration:none; color:black;'>" +
+                                "<div class='notedetails' style='padding: 20px;'><b>" + arrayNotification[i].Topic + "</b>" +
+                                "<br><div>" + arrayNotification[i].Message + "</div> " +
+                                " <span></span><br><i>Published By: TIPS Management Team On " + arrayNotification[i].PublishedOn + "</i><br> <hr></div></a>";
+                                }
+                    }
+
+                    $('#ViewNote').html(varNoteGeneral);
+                }
+
+                }
+                xmlhttp.setRequestHeader('SOAPAction', 'http://tempuri.org/ITIPSMobileAppService/GetGeneralNotificationByNotePreId');
+                xmlhttp.setRequestHeader('Content-Type', 'text/xml;charset=UTF-8');
+                xmlhttp.send(soapRequest);
+        }
+
+         function attachmentDetails(strSelectedNotes) {
+                var xmlhttp = new XMLHttpRequest();
+                xmlhttp.open('POST',getURL(), true);
+                var soapRequest="<?xml version=\"1.0\" encoding=\"utf-8\"?>" +
+                        "<s:Envelope xmlns:s=\"http://schemas.xmlsoap.org/soap/envelope/\">" +
+                        "<s:Header>" +
+                        "</s:Header>" +
+                        "<s:Body>" +
+                        "<GetDocumentsListViewWithPaging xmlns=\"http://tempuri.org/\">" +
+                        "<notepreid>"+strSelectedNotes+"</notepreid>" +
+                        "</GetDocumentsListViewWithPaging>" +
+                        "</s:Body>" +
+                        "</s:Envelope>";
+
+
+
+                xmlhttp.onreadystatechange = function () {
+                   if (xmlhttp.readyState===4 && xmlhttp.status===200) {
+                    var xml = xmlhttp.responseText, xmlDoc = $.parseXML(xml);
+
+                    var arrayAttachmentList =[];
+                    $(xmlDoc).find('NoteAttachmentView').each(function () {
+                        var objAttachmentList = {};
+
+                        objAttachmentList.NoteId = $(this).find('NotePreId').text();
+                        objAttachmentList.Id = $(this).find('Id').text();
+                        objAttachmentList.AttachmentName = $(this).find('AttachmentName').text();
+
+                        arrayAttachmentList.push(objAttachmentList);
+
+                    });
+
+                    var varAttachmentList=[];
+                    for(var i = 0; i < arrayAttachmentList.length; i++) {
+                        varAttachmentList[i] = "<br/><a href='#'>" +
+                                "<div id="+arrayAttachmentList[i].Id+" onclick='clickedAttach(this);' class='notedetails' style='padding: 20px;'><b><u>" + arrayAttachmentList[i].AttachmentName + "</u></b>" +
+                                "</div></a><br/>";
+                    }
+
+                    $('#ViewAttachment').html(varAttachmentList);
+                   }
+
+                }
+                xmlhttp.setRequestHeader('SOAPAction', 'http://tempuri.org/ITIPSMobileAppService/GetDocumentsListViewWithPaging');
+                xmlhttp.setRequestHeader('Content-Type', 'text/xml;charset=UTF-8');
+                xmlhttp.send(soapRequest);
+        }
+
+        //Parameter
+            $('#sa-params').click(function(){
+                swal({
+                    title: "Are you sure you want to logout?",
+                    type: "warning",
+                    showCancelButton: true,
+                    confirmButtonColor: "#DD6B55",
+                    confirmButtonText: "Yes, logout!",
+                    cancelButtonText: "No, cancel!",
+                    closeOnConfirm: false
+                }, function(isConfirm){
+                    if (isConfirm) {
+                       window.localStorage.clear();
+                       document.location.href = "login.html";
+                    }else{
+
+                    }
+                });
+            });
+
+             function clickedAttach(item) {
+                     $(".preloader").show();
+                    if(localStorage.getItem("ServiceFrom")!=null)
+                    {
+                         strCampus = localStorage.getItem("ServiceFrom");
+                    }
+
+                    var url = "";
+
+                    if(strCampus === "ERODE"){
+                         //var url = "http://202.191.246.194:8090/api/MobileAPI/GetNotificationDetails/"+$(item).attr("id");
+                        url = "http://portal.theindianpublicschool.org:8081/api/MobileAPI/GetAttachmentsMemoryStream/"+$(item).attr("id");
+                    }else{
+                        url = "http://117.239.246.86:8081/api/MobileAPI/GetAttachmentsMemoryStream/"+$(item).attr("id");
+                    }
+
+                     var fname = $(item).text();
+                     var filePath = "TIPS";
+                    //downloadFile(url,filePath);
+                    DownloadFile(url,filePath,fname);
+
+                    //to actually open the window..
+                   //window.open(url,'_system');
+                   //navigator.app.loadUrl(url, { openExternal:true });
+                   //viewAttachment($(item).attr("id"));
+               }
+
+              /* function downloadFile(url,filePath)
+                {
+
+                var fileTransfer = new FileTransfer();
+                var uri = encodeURI(url);
+                fileTransfer.download(
+                    uri,
+                    filePath,
+                    function(entry) {
+                        alertSuccess(entry.fullPath);
+                        //alert("asdd"+entry.fullPath);
+                        //document.getElementById("id11").innerHTML="download complete: " + entry.fullPath;
+                    },
+                    function(error) {
+                        alertError(error.source);
+                       // alert("Source"+error.source);
+                        //alert("Target"+error.target);
+                        //alert("Code"+error.code);
+
+                    },
+                    true,
+                    {
+                    }
+                );
+                };*/
+
+             function viewAttachment(strSelectedAttch) {
+                var xmlhttp = new XMLHttpRequest();
+                xmlhttp.open('POST',getURL(), true);
+                var soapRequest="<?xml version=\"1.0\" encoding=\"utf-8\"?>" +
+                        "<s:Envelope xmlns:s=\"http://schemas.xmlsoap.org/soap/envelope/\">" +
+                        "<s:Header>" +
+                        "</s:Header>" +
+                        "<s:Body>" +
+                        "<GetDocumentsListWithPaging xmlns=\"http://tempuri.org/\">" +
+                        " <id>"+strSelectedAttch+"</id>" +
+                        "</GetDocumentsListWithPaging>" +
+                        "</s:Body>" +
+                        "</s:Envelope>";
+
+
+
+                xmlhttp.onreadystatechange = function () {
+                     if (xmlhttp.readyState===4 && xmlhttp.status===200) {
+                    var xml = xmlhttp.responseText, xmlDoc = $.parseXML(xml);
+
+                    var arrayViewAttachment =[];
+                    $(xmlDoc).find('NoteAttachment').each(function () {
+                        var objViewAttachment = {};
+
+                        objViewAttachment.NoteId = $(this).find('NotePreId').text();
+                        objViewAttachment.Id = $(this).find('Id').text();
+
+
+                        objViewAttachment.AttachmentName = $(this).find('AttachmentName').text();
+                        objViewAttachment.Attachment = $(this).find('Attachment').text();
+
+                        arrayViewAttachment.push(objViewAttachment);
+
+                    });
+
+                    var varViewAttachment=[];
+                    for(var i = 0; i < arrayViewAttachment.length; i++) {
+                         $(".preloader").hide();
+                        var blob =  window.atob(arrayViewAttachment[i].Attachment);
+                        var fname = arrayViewAttachment[i].AttachmentName;
+                        var ftype = "pdf";
+
+                        var utf8_str = String.fromCharCode.apply([], new Uint8Array(arrayViewAttachment[i].Attachment));
+                        var base64_str= window.btoa(utf8_str);
+
+                        //window.open("data:application/pdf;base64," + blob);
+                        //saveAs(blob, fname);
+                        download(blob, fname, false)
+                        //var url= window.URL.createObjectURL(blob);
+                        //window.open(url);
+                    }
+
+                }
+
+                }
+                xmlhttp.setRequestHeader('SOAPAction', 'http://tempuri.org/ITIPSMobileAppService/GetDocumentsListWithPaging');
+                xmlhttp.setRequestHeader('Content-Type', 'text/xml;charset=UTF-8');
+                xmlhttp.send(soapRequest);
+        }
+
+
+
+          function alertError(strError){
+                     $(".preloader").hide();
+                 swal({
+                    title: "Error",
+                    text: ""+strError,
+                    type: "warning",
+                    showCancelButton: false,
+                    confirmButtonColor: "#DD6B55",
+                    confirmButtonText: "OK",
+                    closeOnConfirm: true,
+                }, function(isConfirm){
+                    if (isConfirm) {
+
+                    }
+                });
+            }
+
+            function alertSuccess(strFilePath){
+                    $(".preloader").hide();
+                swal({
+                    title: "File downloaded successfully.",
+                    text: "File Path is: "+strFilePath,
+                    type: "success",
+                    showCancelButton: true,
+                    confirmButtonColor: "#DD6B55",
+                    confirmButtonText: "Open",
+                    closeOnConfirm: true,
+                }, function(isConfirm){
+                    if (isConfirm) {
+                            window.open(encodeURI(strFilePath), '_system');
+                       }
+                });
+
+
+            }
+
+
+            //First step check parameters mismatch and checking network connection if available call    download function
+            function DownloadFile(URL, Folder_Name, File_Name) {
+            //Parameters mismatch check
+            if (URL == null && Folder_Name == null && File_Name == null) {
+                return;
+            }
+            else {
+                //checking Internet connection availablity
+                var networkState = navigator.connection.type;
+                if (networkState == Connection.NONE) {
+                    return;
+                } else {
+                    download(URL, Folder_Name, File_Name); //If available download function call
+                }
+              }
+            }
+
+
+            function download(URL, Folder_Name, File_Name) {
+            //step to request a file system
+                window.requestFileSystem(LocalFileSystem.PERSISTENT, 0, fileSystemSuccess, fileSystemFail);
+
+            function fileSystemSuccess(fileSystem) {
+                var download_link = encodeURI(URL);
+                ext = download_link.substr(download_link.lastIndexOf('.') + 1); //Get extension of URL
+
+                var directoryEntry = fileSystem.root; // to get root path of directory
+                directoryEntry.getDirectory(Folder_Name, { create: true, exclusive: false }, onDirectorySuccess, onDirectoryFail); // creating folder in sdcard
+                var rootdir = fileSystem.root;
+                var fp = rootdir.toURL(); // Returns Fulpath of local directory
+
+                fp = fp + "/" + Folder_Name + "/" + File_Name; // fullpath and name of the file which we want to give
+                // download function call
+                    filetransfer(download_link, fp);
+
+            }
+
+            function onDirectorySuccess(parent) {
+                // Directory created successfuly
+            }
+
+            function onDirectoryFail(error) {
+                //Error while creating directory
+               // alert("Unable to create new directory: " + error.code);
+            }
+
+              function fileSystemFail(evt) {
+                //Unable to access file system
+                //alert(evt.target.error.code);
+             }
+            }
+
+
+            function filetransfer(download_link, fp) {
+            var fileTransfer = new FileTransfer();
+            // File download function with URL and local path
+            fileTransfer.download(download_link, fp,
+                                function (entry) {
+                                    //alert("download complete: " + entry.fullPath);
+                                     alertSuccess('file://mnt/sdcard'+entry.fullPath);
+                                     // $(".preloader").hide();
+                                     //window.open(encodeURI(entry.fullPath), '_system');
+                                },
+                             function (error) {
+                                    alertError("An error has occurred. Please try again later.")
+                                 //Download abort errors or download failed errors
+                                // alert("download error source " + error.source);
+                                 //alert("download error target " + error.target);
+                                 //alert("upload error code" + error.code);
+                             }
+                        );
+            }
+
+</script>
+
+</body>
+</html>

@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <title>TIPS</title>
+
+    <!-- Vendor CSS -->
+    <link href="vendors/bower_components/animate.css/animate.min.css" rel="stylesheet">
+    <link href="vendors/bower_components/sweetalert/dist/sweetalert-override.min.css"
+          rel="stylesheet">
+    <link href="vendors/bower_components/material-design-iconic-font/css/material-design-iconic-font.min.css"
+          rel="stylesheet">
+
+    <!-- CSS -->
+    <link href="css/app.min.1.css" rel="stylesheet">
+    <link href="css/img_slider.css" rel="stylesheet" type="text/css"/>
+    <style>
+        #mBody {
+        height: 3em;
+        overflow: hidden;
+        }
+    </style>
+</head>
+<body>
+<header id="header">
+    <ul class="header-inner">
+        <li id="menu-trigger" data-trigger="#sidebar">
+            <div class="line-wrap">
+                <div class="line top"></div>
+                <div class="line center"></div>
+                <div class="line bottom"></div>
+            </div>
+        </li>
+
+        <li class="logo">
+            <a href="#"><b>TIPS</b></a>
+        </li>
+    </ul>
+</header>
+
+<section id="main">
+    <aside id="sidebar">
+        <div class="sidebar-inner c-overflow">
+            <div class="profile-menu">
+                <a href="">
+                    <div class="profile-pic">
+
+                    </div>
+                    <div class="profile-info">
+                        <i class="md md-arrow-drop-down"></i>
+                    </div>
+                </a>
+
+                <ul class="main-menu">
+
+                    <li>
+                        <a href="#" id="sa-params"><i class="md md-history"></i> Logout</a>
+                    </li>
+                </ul>
+            </div>
+
+            <ul class="main-menu" id="editMenu">
+                <li><a href="index.html"><i class="md md-home"></i>Home</a></li>
+
+                <li><a href="assess360.html"><i class="md md-trending-up"></i>Assess360</a></li>
+
+                <li class="active"><a href="#"><i class="md md-notifications"></i>Notification</a>
+                </li>
+
+                <li class="sub-menu">
+                    <a href="#"><i class="md md-view-list"></i>Support Desk</a>
+
+                    <ul>
+                        <li><a href="issue-mgmnt.html">Issue Management</a></li>
+                    </ul>
+                </li>
+
+                <!-- <li><a href="#"><i class="md md-image"></i>Photo Gallery</a></li>-->
+
+                <li><a href="student-details.html"><i class="md md-my-library-books"></i>Student
+                    Details</a></li>
+
+                <li><a href="attendance.html"><i class="md md-today"></i> Attendance</a></li>
+
+                <li><a href="reportcard.html"><i class="md md-assessment"></i> Report Card</a></li>
+
+                <li><a href="map2.html"><i class="md md-location-on"></i> GPS Tracking</a></li>
+
+            </ul>
+        </div>
+    </aside>
+
+
+    <section id="content">
+        <div class="container">
+            <div class="row">
+                <div class="col-sm-6">
+
+                    <!-- Recent Posts -->
+                    <div class="card">
+                        <div class="card-header ch-alt m-b-20">
+                            <h2>Notification</h2>
+                        </div>
+
+                        <div class="card-body">
+                            <div class="NoteClass">
+                                <div id="ViewNote">
+                                    <div id="noData" style="margin:15px;display:none;">No new notification.</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</section>
+
+<div class="preloader" style="display: none;">
+    <div class="loader"></div>
+</div>
+
+<footer id="footer">
+    &copy; TIPS 2013 Support | Privacy Policy
+</footer>
+
+<!-- Javascript Libraries -->
+<script src="vendors/bower_components/jquery/dist/jquery.min.js"></script>
+<script src="vendors/bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+<script src="vendors/bower_components/sweetalert/dist/sweetalert.min.js"></script>
+<script src="vendors/bower_components/jquery.nicescroll/jquery.nicescroll.min.js"></script>
+
+<script src="cordova.js"></script>
+<script src="js/functions.js"></script>
+<script src="js/apps.js"></script>
+
+
+<script type="text/javascript">
+    document.addEventListener("deviceready", onDeviceReady, false);
+
+            function onDeviceReady(){
+ $(".preloader").show();
+        var strCampus = JSON.parse(localStorage.getItem("mCampus"));
+        var strGrade = JSON.parse(localStorage.getItem("grade"));
+        if(strCampus=="Salem KG" || strCampus=="TIPS CBSE" || strCampus=="TIPS MONTI"){
+            document.getElementById("editMenu").children[1].style.display = "none"
+        }else  if(!(strGrade=="VI" || strGrade=="VII" || strGrade=="VIII" || strGrade=="IX" || strGrade=="X")){
+            document.getElementById("editMenu").children[1].style.display = "none"
+        }
+
+
+
+        var strUserId = JSON.parse(localStorage.getItem("mUserId"));
+        var uProfile = [];
+            uProfile[0]=strUserId+"<i class=\"md md-arrow-drop-down\"></i>";
+             $('div.profile-info').html(uProfile);
+
+        var xmlhttp = new XMLHttpRequest();
+        xmlhttp.open('POST',getURL(), true);
+        var soapRequest="<?xml version=\"1.0\" encoding=\"utf-8\"?>" +
+                "<s:Envelope xmlns:s=\"http://schemas.xmlsoap.org/soap/envelope/\">" +
+                "<s:Header>" +
+                "</s:Header>" +
+                "<s:Body>" +
+                "<IndividualNotificationList xmlns=\"http://tempuri.org/\">" +
+                "<UserId>"+strUserId+"</UserId>" +
+                "<Campus>"+strCampus+"</Campus>" +
+                "</IndividualNotificationList>" +
+                "</s:Body>" +
+                "</s:Envelope>";
+
+
+
+        xmlhttp.onreadystatechange = function () {
+            if (xmlhttp.readyState===4 && xmlhttp.status===200) {
+            var xml = xmlhttp.responseText, xmlDoc = $.parseXML(xml);
+
+            var arrayNotification =[];
+            $(xmlDoc).find('Notification').each(function () {
+                var objNotification = {};
+
+                objNotification.NoteId = $(this).find('NotePreId').text();
+                objNotification.Topic = $(this).find('Topic').text();
+                objNotification.Message = $(this).find('Message').text();
+                objNotification.PublishedOn = $(this).find('PublishedOn').text();
+                objNotification.Status = $(this).find('Status').text();
+
+                arrayNotification.push(objNotification);
+
+            });
+
+            var varNoteGeneral=[];
+            for(var i = 0; i < arrayNotification.length; i++) {
+                if(arrayNotification[i].Status==1){
+                varNoteGeneral[i] = "<div id="+arrayNotification[i].NoteId+" onclick='clicked(this);' style='text-decoration:none; color:black;'>" +
+                        "<div class='notedetails' style='padding: 20px;'><b>" + arrayNotification[i].Topic + "</b>" +
+                        "<br><div id='mBody'>" + arrayNotification[i].Message + "</div> " +
+                        " <span><a href='#'>...Read More</a></span><br><i>Published By: TIPS Management Team On " + arrayNotification[i].PublishedOn + "</i><br><hr></div></div>";
+                        }
+            }
+
+            if(varNoteGeneral.length>0){
+             $(".preloader").hide();
+                 $('#noData').hide();
+                $('#ViewNote').html(varNoteGeneral);
+            }else{
+            $(".preloader").hide();
+                $('#noData').show();
+            }
+        }
+
+        }
+        xmlhttp.setRequestHeader('SOAPAction', 'http://tempuri.org/ITIPSMobileAppService/IndividualNotificationList');
+        xmlhttp.setRequestHeader('Content-Type', 'text/xml;charset=UTF-8');
+        xmlhttp.send(soapRequest);
+
+
+
+        }
+
+        //Parameter
+            $('#sa-params').click(function(){
+                swal({
+                    title: "Are you sure you want to logout?",
+                    type: "warning",
+                    showCancelButton: true,
+                    confirmButtonColor: "#DD6B55",
+                    confirmButtonText: "Yes, logout!",
+                    cancelButtonText: "No, cancel!",
+                    closeOnConfirm: false
+                }, function(isConfirm){
+                    if (isConfirm) {
+                       window.localStorage.clear();
+                       document.location.href = "login.html";
+                    }else{
+
+                    }
+                });
+            });
+
+            function clicked(item) {
+                    localStorage.setItem("selectedNotes",JSON.stringify($(item).attr("id")));
+                    document.location.href = "notifications-details.html";
+               }
+
+</script>
+
+</body>
+</html>

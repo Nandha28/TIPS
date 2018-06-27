@@ -1,0 +1,393 @@
+<!DOCTYPE html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <title>TIPS</title>
+
+    <!-- Vendor CSS -->
+    <link href="vendors/bower_components/animate.css/animate.min.css" rel="stylesheet">
+    <link href="vendors/bower_components/sweetalert/dist/sweetalert-override.min.css"
+          rel="stylesheet">
+    <link href="vendors/bower_components/material-design-iconic-font/css/material-design-iconic-font.min.css"
+          rel="stylesheet">
+
+    <!-- CSS -->
+    <link href="css/app.min.1.css" rel="stylesheet">
+    <link href="css/img_slider.css" rel="stylesheet" type="text/css"/>
+    <style>
+        #mBody {
+        height: 3em;
+        overflow: hidden;
+        }
+    </style>
+</head>
+<body>
+<header id="header">
+    <ul class="header-inner">
+        <li id="menu-trigger" data-trigger="#sidebar">
+            <div class="line-wrap">
+                <div class="line top"></div>
+                <div class="line center"></div>
+                <div class="line bottom"></div>
+            </div>
+        </li>
+
+        <li class="logo">
+            <a href="#"><b>TIPS</b></a>
+        </li>
+    </ul>
+</header>
+
+<section id="main">
+    <aside id="sidebar">
+        <div class="sidebar-inner c-overflow">
+            <div class="profile-menu">
+                <a href="">
+                    <div class="profile-pic">
+
+                    </div>
+                    <div class="profile-info">
+
+                    </div>
+                </a>
+
+                <ul class="main-menu">
+
+                    <li>
+                        <a href="#" id="sa-params"><i class="md md-history"></i> Logout</a>
+                    </li>
+                </ul>
+            </div>
+
+            <ul class="main-menu" id="editMenu">
+                <li><a href="index.html"><i class="md md-home"></i>Home</a></li>
+
+                <li class="active"><a href="#"><i class="md md-trending-up"></i>Assess360</a></li>
+
+                <li><a href="notifications.html"><i class="md md-notifications"></i>Notification</a>
+                </li>
+
+                <li class="sub-menu">
+                    <a href="#"><i class="md md-view-list"></i>Support Desk</a>
+
+                    <ul>
+                        <li><a href="issue-mgmnt.html">Issue Management</a></li>
+                    </ul>
+                </li>
+
+                <!-- <li><a href="#"><i class="md md-image"></i>Photo Gallery</a></li>-->
+
+                <li><a href="student-details.html"><i class="md md-my-library-books"></i>Student
+                    Details</a></li>
+
+                <li><a href="attendance.html"><i class="md md-today"></i> Attendance</a></li>
+                <li><a href="reportcard.html"><i class="md md-assessment"></i> Report Card</a></li>
+
+                <li><a href="map2.html"><i class="md md-location-on"></i> GPS Tracking</a></li>
+
+            </ul>
+        </div>
+    </aside>
+
+    <section id="content">
+        <div class="container">
+            <br>
+
+            <div class="card">
+                <div class="card-header ch-alt m-b-20">
+                    <h2>Assess360</h2>
+                </div>
+
+
+                <div class="row" style="margin: 10px;">
+                    <div class="col-sm-3">
+                        <div class="mini-charts-item bgm-teal">
+                            <div class="clearfix">
+                                <div class="chart chart-pie stats-pie"></div>
+                                <div class="count" id="markaw">
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-3">
+                        <div class="epc-item bgm-green">
+                            <div class="easy-pie main-pie" id="characterPer" data-percent="100">
+                                <div class="percent" id="character"></div>
+                                <div class="pie-title">Character (20)</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-3">
+                        <div class="epc-item bgm-purple">
+                            <div class="easy-pie main-pie" id="AttPunPer" data-percent="100">
+                                <div class="percent" id="AttPun"></div>
+                                <div class="pie-title">Attendance / Punctuality (10)</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-3">
+                        <div class="epc-item bgm-deeporange">
+                            <div class="easy-pie main-pie" id="HomeCompPer" data-percent="100">
+                                <div class="percent" id="HomeComp"></div>
+                                <div class="pie-title">Homework Completeion (05)</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-3">
+                        <div class="epc-item bgm-lightblue">
+                            <div class="easy-pie main-pie" data-percent="100" id="HomeAccuPer">
+                                <div class="percent" id="HomeAccu"></div>
+                                <div class="pie-title">Homework Accuracy (15)</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-3">
+                        <div class="epc-item bgm-indigo">
+                            <div class="easy-pie main-pie" data-percent="100" id="WeekTestPer">
+                                <div class="percent" id="WeekTest"></div>
+                                <div class="pie-title">Weekly / Chapter Tests (20)</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-3">
+                        <div class="epc-item bgm-red">
+                            <div class="easy-pie main-pie" data-percent="100" id="slcPer">
+                                <div class="percent" id="slc"></div>
+                                <div class="pie-title">SLC Parent Assessment (05)</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-3">
+                        <div class="epc-item bgm-brown">
+                            <div class="easy-pie main-pie" data-percent="100" id="termPer">
+                                <div class="percent" id="term"></div>
+                                <div class="pie-title">Terms Assessment (25)</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </section>
+</section>
+
+<div class="preloader" style="display: none;">
+    <div class="loader"></div>
+</div>
+
+<footer id="footer">
+    &copy; TIPS 2013 Support | Privacy Policy
+</footer>
+
+
+<!-- Javascript Libraries -->
+<script src="vendors/bower_components/jquery/dist/jquery.min.js"></script>
+<script src="vendors/bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+
+<script src="vendors/bower_components/jquery.nicescroll/jquery.nicescroll.min.js"></script>
+<script src="vendors/bower_components/Waves/dist/waves.min.js"></script>
+<script src="vendors/bootstrap-growl/bootstrap-growl.min.js"></script>
+<script src="vendors/sparklines/jquery.sparkline.min.js"></script>
+<script src="vendors/bower_components/sweetalert/dist/sweetalert.min.js"></script>
+<script src="vendors/bower_components/jquery.easy-pie-chart/dist/jquery.easypiechart.min.js"></script>
+
+<script src="cordova.js"></script>
+<script src="js/charts.js"></script>
+<script src="js/functions.js"></script>
+<script src="js/apps.js"></script>
+
+<script type="text/javascript">
+    document.addEventListener("deviceready", onDeviceReady, false);
+
+    function onDeviceReady(){
+        $(".preloader").show();
+        var strUserId = JSON.parse(localStorage.getItem("mUserId"));
+
+        var uProfile = [];
+        uProfile[0]=strUserId+"<i class=\"md md-arrow-drop-down\"></i>";
+        $('div.profile-info').html(uProfile);
+
+
+        var xmlhttp = new XMLHttpRequest();
+        xmlhttp.open('POST',getURL(), true);
+        var soapRequest="<?xml version=\"1.0\" encoding=\"utf-8\"?>" +
+        "<s:Envelope xmlns:s=\"http://schemas.xmlsoap.org/soap/envelope/\">" +
+        "<s:Header>" +
+        "</s:Header>" +
+        "<s:Body>" +
+        "<Assess360 xmlns=\"http://tempuri.org/\">" +
+        "<UserId>"+strUserId+"</UserId>" +
+        "</Assess360>" +
+        "</s:Body>" +
+        "</s:Envelope>";
+
+
+
+        xmlhttp.onreadystatechange = function () {
+            if (xmlhttp.readyState===4){
+                if(xmlhttp.status===200) {
+                    var xml = xmlhttp.responseText, xmlDoc = $.parseXML(xml);
+
+                    var arrayAssess360 =[];
+                    $(xmlDoc).find('Assess360Result').each(function () {
+                        var objAssess360 = {};
+
+                        objAssess360.ConsolidatedMarks = $(this).find('ConsolidatedMarks').text();
+
+                        objAssess360.Character = $(this).find('Character').text();
+                        objAssess360.AttPunc = $(this).find('AttPunc').text();
+                        objAssess360.HomeComp = $(this).find('HomeComp').text();
+                        objAssess360.HomeAccu = $(this).find('HomeAccu').text();
+                        objAssess360.WeekTest = $(this).find('WeekTest').text();
+                        objAssess360.SLC = $(this).find('SLC').text();
+                        objAssess360.TermAssess = $(this).find('TermAssess').text();
+
+                        arrayAssess360.push(objAssess360);
+
+                    });
+
+
+                    var varAssess360=[];
+                    for(var i = 0; i < arrayAssess360.length; i++) {
+
+                        var totalPercentage = [];
+                        totalPercentage[i] = "<small>Marks Awarded:</small><h2>"+arrayAssess360[i].ConsolidatedMarks+"%</h2>";
+                        $('#markaw').html(totalPercentage);
+
+                        /* Character */
+                        var arrayCharacter = [];
+                        var mark = arrayAssess360[i].Character;
+                        var baseMark = Math.floor(mark);
+                        var frac1 = (mark - Math.floor(mark)).toString().slice(2, 4);
+                        if(frac1==0){
+                            arrayCharacter[i] = baseMark;
+                        }else{
+                            arrayCharacter[i] = baseMark+"."+frac1;
+                        }
+                        $('#character').html(arrayCharacter);
+                        var charPer = (arrayAssess360[i].Character/20)*100;
+                        $('#characterPer').data('easyPieChart').update(charPer);
+
+
+                        /* AttPun */
+                        var arrayAttPun = [];
+                        var mark = arrayAssess360[i].AttPunc;
+                        var baseMark = Math.floor(mark);
+                        var frac2 = (mark - Math.floor(mark)).toString().slice(2, 4);
+                        if(frac2==0){
+                            arrayAttPun[i] = baseMark;
+                        }else{
+                            arrayAttPun[i] = baseMark+"."+frac2;
+                        }
+                        $('#AttPun').html(arrayAttPun);
+                        var AttPunPer = (arrayAssess360[i].AttPunc/10)*100;
+                        $('#AttPunPer').data('easyPieChart').update(AttPunPer);
+
+                         /* HomeComp */
+                        var arrayHomeComp = [];
+                        var mark = arrayAssess360[i].HomeComp;
+                        var baseMark = Math.floor(mark);
+                        var frac3 = (mark - Math.floor(mark)).toString().slice(2, 4);
+                        if(frac3==0){
+                            arrayHomeComp[i] = baseMark;
+                        }else{
+                            arrayHomeComp[i] = baseMark+"."+frac3;
+                        }
+                        $('#HomeComp').html(arrayHomeComp);
+                        var HomeCompPer = (arrayAssess360[i].HomeComp/5)*100;
+                        $('#HomeCompPer').data('easyPieChart').update(HomeCompPer);
+
+
+
+                          /* HomeAccu*/
+                        var arrayHomeAccu = [];
+                        var mark = arrayAssess360[i].HomeAccu;
+                        var baseMark = Math.floor(mark);
+                        var frac4 = (mark - Math.floor(mark)).toString().slice(2, 4);
+                        if(frac4==0){
+                            arrayHomeAccu[i] = baseMark;
+                        }else{
+                            arrayHomeAccu[i] = baseMark+"."+frac4;
+                        }
+                        $('#HomeAccu').html(arrayHomeAccu);
+                        var HomeAccuPer = (arrayAssess360[i].HomeAccu/15)*100;
+                        $('#HomeAccuPer').data('easyPieChart').update(HomeAccuPer);
+
+
+                          /* WeekTest */
+                        var arrayWeekTest = [];
+                        var mark = arrayAssess360[i].WeekTest;
+                        var baseMark = Math.floor(mark);
+                        var frac5 = (mark - Math.floor(mark)).toString().slice(2, 4);
+                        if(frac5==0){
+                            arrayWeekTest[i] = baseMark;
+                        }else{
+                            arrayWeekTest[i] = baseMark+"."+frac5;
+                        }
+                        $('#WeekTest').html(arrayWeekTest);
+                        var WeekTestPer = (arrayAssess360[i].WeekTest/20)*100;
+                        $('#WeekTestPer').data('easyPieChart').update(WeekTestPer);
+
+                          /* slc */
+                        var arrayslc = [];
+                        var mark = arrayAssess360[i].SLC;
+                        var baseMark = Math.floor(mark);
+                        var frac6 = (mark - Math.floor(mark)).toString().slice(2, 4);
+                        if(frac6==0){
+                            arrayslc[i] = baseMark;
+                        }else{
+                            arrayslc[i] = baseMark+"."+frac6;
+                        }
+                        $('#slc').html(arrayslc);
+                        var slcPer = (arrayAssess360[i].SLC/5)*100;
+                        $('#slcPer').data('easyPieChart').update(slcPer);
+
+
+                          /* term */
+                        var arrayTerm = [];
+                        var mark = arrayAssess360[i].TermAssess;
+                        var baseMark = Math.floor(mark);
+                        var frac7 = (mark - Math.floor(mark)).toString().slice(2, 4);
+                        if(frac7==0){
+                            arrayTerm[i] = baseMark;
+                        }else{
+                            arrayTerm[i] = baseMark+"."+frac7;
+                        }
+                        $('#term').html(arrayTerm);
+                        var termPer = (arrayAssess360[i].TermAssess/25)*100;
+                        $('#termPer').data('easyPieChart').update(termPer);
+
+                        $(".preloader").hide();
+                    }
+                }
+            }
+        }
+        xmlhttp.setRequestHeader('SOAPAction', 'http://tempuri.org/ITIPSMobileAppService/Assess360');
+        xmlhttp.setRequestHeader('Content-Type', 'text/xml;charset=UTF-8');
+        xmlhttp.send(soapRequest);
+    }
+
+    //Parameter
+    $('#sa-params').click(function(){
+        swal({
+            title: "Are you sure you want to logout?",
+            type: "warning",
+            showCancelButton: true,
+            confirmButtonColor: "#DD6B55",
+            confirmButtonText: "Yes, logout!",
+            cancelButtonText: "No, cancel!",
+            closeOnConfirm: false
+        }, function(isConfirm){
+            if (isConfirm) {
+               window.localStorage.clear();
+               document.location.href = "login.html";
+            }
+        });
+    });
+
+</script>
+
+</body>
+</html>

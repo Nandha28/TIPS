@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <title>TIPS</title>
+
+    <!-- Vendor CSS -->
+    <link href="vendors/bower_components/animate.css/animate.min.css" rel="stylesheet">
+    <link href="vendors/bower_components/sweetalert/dist/sweetalert-override.min.css"
+          rel="stylesheet">
+    <link href="vendors/bower_components/material-design-iconic-font/css/material-design-iconic-font.min.css"
+          rel="stylesheet">
+
+    <!-- CSS -->
+    <link href="css/app.min.1.css" rel="stylesheet">
+    <link href="css/img_slider.css" rel="stylesheet" type="text/css"/>
+
+</head>
+<body>
+<header id="header">
+    <ul class="header-inner">
+        <li id="menu-trigger" data-trigger="#sidebar">
+            <div class="line-wrap">
+                <div class="line top"></div>
+                <div class="line center"></div>
+                <div class="line bottom"></div>
+            </div>
+        </li>
+
+        <li class="logo">
+            <a href="#"><b>TIPS</b></a>
+        </li>
+    </ul>
+</header>
+
+<section id="main">
+    <aside id="sidebar">
+        <div class="sidebar-inner c-overflow">
+            <div class="profile-menu">
+                <a href="">
+                    <div class="profile-pic">
+
+                    </div>
+                    <div class="profile-info">
+
+                        <i class="md md-arrow-drop-down"></i>
+                    </div>
+                </a>
+
+                <ul class="main-menu">
+
+                    <li>
+                        <a href="#" id="sa-params"><i class="md md-history"></i> Logout</a>
+                    </li>
+                </ul>
+            </div>
+
+            <ul class="main-menu" id="editMenu">
+                <li><a href="index.html"><i class="md md-home"></i>Home</a></li>
+
+                <li><a href="assess360.html"><i class="md md-trending-up"></i>Assess360</a></li>
+
+                <li><a href="notifications.html"><i class="md md-notifications"></i>Notification</a>
+                </li>
+
+                <li class="sub-menu">
+                    <a href="#"><i class="md md-view-list"></i>Support Desk</a>
+
+                    <ul>
+                        <li><a href="issue-mgmnt.html">Issue Management</a></li>
+                    </ul>
+                </li>
+
+                <!-- <li><a href="#"><i class="md md-image"></i>Photo Gallery</a></li>-->
+
+                <li class="active"><a href="#"><i class="md md-my-library-books"></i>Student Details</a>
+                </li>
+
+                <li><a href="attendance.html"><i class="md md-today"></i> Attendance</a></li>
+
+                <li><a href="reportcard.html"><i class="md md-assessment"></i> Report Card</a></li>
+
+                <li><a href="map2.html"><i class="md md-location-on"></i> GPS Tracking</a></li>
+            </ul>
+        </div>
+    </aside>
+
+
+    <section id="content">
+        <div class="container">
+
+            <div class="t-view" data-tv-type="image">
+                <div class="tv-header media">
+                    <div class="media-body p-t-5">
+                        <strong class="d-block"><i class="md md-person m-r-5"></i>Student General
+                            Details</strong>
+                    </div>
+                </div>
+
+                <div class="tv-body">
+                    <div class="pmb-block">
+                        <div class="pmbb-body">
+                            <div class="pmbb-view" id="studentDetails">
+
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+
+        </div>
+    </section>
+</section>
+
+<footer id="footer">
+    &copy; TIPS 2013 Support | Privacy Policy
+</footer>
+
+<!-- Javascript Libraries -->
+<script src="vendors/bower_components/jquery/dist/jquery.min.js"></script>
+<script src="vendors/bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+<script src="vendors/bower_components/sweetalert/dist/sweetalert.min.js"></script>
+<script src="vendors/bower_components/jquery.nicescroll/jquery.nicescroll.min.js"></script>
+
+<script src="cordova.js"></script>
+<script src="js/functions.js"></script>
+<script src="js/apps.js"></script>
+
+<script type="text/javascript">
+    document.addEventListener("deviceready", onDeviceReady, false);
+
+            function onDeviceReady(){
+        var strUserId = JSON.parse(localStorage.getItem("mUserId"));
+         var uProfile = [];
+            uProfile[0]=strUserId+"<i class=\"md md-arrow-drop-down\"></i>";
+             $('div.profile-info').html(uProfile);
+
+       var strCampus = JSON.parse(localStorage.getItem("mCampus"));
+        var strGrade = JSON.parse(localStorage.getItem("grade"));
+        if(strCampus=="Salem KG" || strCampus=="TIPS CBSE" || strCampus=="TIPS MONTI"){
+            document.getElementById("editMenu").children[1].style.display = "none"
+        }else  if(!(strGrade=="VI" || strGrade=="VII" || strGrade=="VIII" || strGrade=="IX" || strGrade=="X")){
+            document.getElementById("editMenu").children[1].style.display = "none"
+        }
+
+        var aStudentDetails = JSON.parse(localStorage.getItem("arrayStudentDetails"));
+
+            var varStudentDetails=[];
+            for(var i = 0; i < aStudentDetails.length; i++) {
+                var objST = aStudentDetails[i];
+
+                var vTransport = "";
+                if(objST.Transport==="true"){
+                    vTransport="School";
+                }else{
+                    vTransport="Own";
+                }
+
+
+                varStudentDetails="<dl class=\"dl-horizontal\">" +
+                        "<dt>Campus</dt>" +
+                        "<dd>"+objST.Campus+"</dd>" +
+                        "</dl>" +
+                        "<dl class=\"dl-horizontal\">" +
+                        "<dt>Student Name</dt>" +
+                        "<dd>"+objST.Name+"</dd>" +
+                        "</dl>" +
+                        "<dl class=\"dl-horizontal\">" +
+                        "<dt>Student Id</dt>" +
+                        "<dd>"+objST.NewId+"</dd>" +
+                        "</dl>" +
+                        "<dl class=\"dl-horizontal\">" +
+                        "<dt>Grade</dt>" +
+                        "<dd>"+objST.Grade+"</dd>" +
+                        "</dl>" +
+                        "<dl class=\"dl-horizontal\">" +
+                        "<dt>Section</dt>" +
+                        "<dd>"+objST.Section+"</dd>" +
+                        "</dl>" +
+                        "<dl class=\"dl-horizontal\">" +
+                        "<dt>Date of Birth</dt>" +
+                        "<dd>"+objST.DOB+"</dd>" +
+                        "</dl>" +
+                        "<dl class=\"dl-horizontal\">" +
+                        "<dt>Gender</dt>" +
+                        "<dd>"+objST.Gender+"</dd>" +
+                        "</dl><dl class=\"dl-horizontal\">" +
+                        "<dt>Blood Group</dt>" +
+                        "<dd>"+objST.BGRP+"</dd>" +
+                        "</dl>" +
+                        "<dl class=\"dl-horizontal\">" +
+                        "<dt>Transport Required</dt>" +
+                        "<dd>"+vTransport+"</dd>" +
+                        "</dl>" +
+                        "<dl class=\"dl-horizontal\">" +
+                        "<dt>Boarding type</dt>" +
+                        "<dd>"+objST.BoardingType+"</dd>" +
+                        "</dl>" +
+                        "<dl class=\"dl-horizontal\">" +
+                        "<dt>Food preferences</dt>" +
+                        "<dd>"+objST.Food+"</dd>" +
+                        "</dl>" +
+                        "<dl class=\"dl-horizontal\">" +
+                        "<dt>Email Id</dt>" +
+                        "<dd>"+objST.EmailId+"</dd>" +
+                        "</dl>";
+
+            }
+
+            $('#studentDetails').html(varStudentDetails);
+
+        }
+        //Parameter
+            $('#sa-params').click(function(){
+                swal({
+                    title: "Are you sure you want to logout?",
+                    type: "warning",
+                    showCancelButton: true,
+                    confirmButtonColor: "#DD6B55",
+                    confirmButtonText: "Yes, logout!",
+                    cancelButtonText: "No, cancel!",
+                    closeOnConfirm: false
+                }, function(isConfirm){
+                    if (isConfirm) {
+                       window.localStorage.clear();
+                       document.location.href = "login.html";
+                    }
+                });
+            });
+
+
+
+
+</script>
+
+</body>
+</html>
